@@ -16,6 +16,24 @@ export const CreateUserSessionHandler = async (req: Request, res: Response) => {
       userAgent: req.get('user-agent'),
     })
 
+    res.cookie('accessToken', accessToken, {
+      maxAge: 900000,
+      httpOnly: true,
+      domain: 'localhost',
+      path: '/',
+      sameSite: 'strict',
+      secure: false,
+    })
+    
+    res.cookie('refreshToken', refreshToken, {
+      maxAge: 86400000,
+      httpOnly: true,
+      domain: 'localhost',
+      path: '/',
+      sameSite: 'strict',
+      secure: false,
+    })
+
     return res.status(201).json({ accessToken, refreshToken })
   } catch (e) {
     log.error(e)
