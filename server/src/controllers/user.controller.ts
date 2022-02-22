@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
 import { CreateUserInput } from '../schema/user.schema'
 import { CreateUser } from '../services/user.service'
-import { log } from '../utils/logger'
 
-export const createUserHandler = async (
+export const CreateUserHandler = async (
   req: Request<{}, {}, CreateUserInput['body']>,
   res: Response
 ) => {
@@ -13,4 +12,8 @@ export const createUserHandler = async (
   } catch (error) {
     return res.status(error.status).json({ message: error.message })
   }
+}
+
+export const GetCurrentUser = async (req: Request, res: Response) => {
+  return res.json(res.locals.user)
 }
