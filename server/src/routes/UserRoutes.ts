@@ -9,5 +9,5 @@ import { createUserSchema } from '../schema/user.schema'
 
 const userRoutes = Router()
 userRoutes.post('/user', validate(createUserSchema), CreateUserHandler)
-userRoutes.post('/user/me', deserialize, GetCurrentUser)
+userRoutes.get('/user/me', deserialize, GetCurrentUser)
 export { userRoutes }
