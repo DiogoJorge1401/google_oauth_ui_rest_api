@@ -33,6 +33,15 @@ export const deserializeUser = async (
 
     res.setHeader('x-access-token', newAccessToken)
 
+    res.cookie('accessToken', newAccessToken, {
+      maxAge: 900000,
+      httpOnly: true,
+      domain: 'localhost',
+      path: '/',
+      sameSite: 'strict',
+      secure: false,
+    })
+
     const { decoded } = await verifyJwt(newAccessToken)
 
     res.locals.user = decoded
