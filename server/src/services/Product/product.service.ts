@@ -1,9 +1,6 @@
-import {
-  ProductDocument,
-  ProductInput,
-  ProductModel,
-} from '../models/product.model'
 import { FilterQuery, UpdateQuery, QueryOptions } from 'mongoose'
+import { ProductModel } from '../../models/Product/product.model'
+import { ProductDocument, ProductInput } from '../../models/Product/ProductModelInterfaces'
 
 export const CreateProduct = async (input: ProductInput) => {
   return await ProductModel.create(input)

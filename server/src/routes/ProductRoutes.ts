@@ -1,11 +1,11 @@
 import { Router } from 'express'
+import { deserializeUser, validate } from '../middlewares'
 import {
   CreateProductHandler,
   DeleteProducteHandler,
   ReadProductHandler,
   UpdateProductHandler,
-} from '../controllers/product.controller'
-import { deserializeUser, validate } from '../middlewares'
+} from '../controllers/Product/product.controller'
 import {
   CreateProductSchema,
   DeleteProductSchema,
@@ -28,11 +28,13 @@ productRoutes.post(
   validate(CreateProductSchema),
   CreateProductHandler
 )
+
 productRoutes.put(
   '/product/:productId',
   validate(UpdateProductSchema),
   UpdateProductHandler
 )
+
 productRoutes.delete(
   '/product/:productId',
   validate(DeleteProductSchema),

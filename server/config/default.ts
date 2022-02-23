@@ -26,6 +26,8 @@ MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgGivJSY0grTjYvivECwCLsQkaKId
 M21Wtdjm/Byi5wezTxwRkFQqm96jOIRgeFB3N4O/AbtG+0+TICSYGraWZysGBxhJ
 hLBGS7cQSSpgY80pAgMBAAE=
 -----END PUBLIC KEY-----`,
-  refreshTokenPrivateKey: ``,
-  refreshTokenPublicKey: ``,
+  googleClientId:
+    '55287493619-3jf1esnabb14ph43t6cmck0fo65crpt0.apps.googleusercontent.com',
+  googleClientSecret: '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',
+  googleOauthRedirectUri:'http://localhost:3000/api/session/oauth/google'
 }

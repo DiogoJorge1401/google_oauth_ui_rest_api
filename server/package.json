@@ -10,6 +10,7 @@
     "test": "jest --maxWorks=25% --watchAll --detectOpenHandles"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "bcrypt": "^5.0.1",
     "config": "^3.3.7",
     "cookie-parser": "^1.4.6",

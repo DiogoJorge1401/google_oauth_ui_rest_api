@@ -2,8 +2,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
 import { app } from '../app'
-import { CreateProduct } from '../services/product.service'
-import { signJwt } from '../utils/jwt.utils'
+import { CreateProduct } from '../services/Product/product.service'
+import { signJwt } from '../utils/Jwt.utils'
 
 const makeProductDTO = () => {
   const userId = new mongoose.Types.ObjectId().toString()

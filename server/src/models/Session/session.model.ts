@@ -1,16 +1,5 @@
 import mongoose from 'mongoose'
-import { UserDocument } from './user.model'
-
-export interface SessionInput {
-  user?: UserDocument['_id']
-  valid?: boolean
-  userAgent?: string
-}
-
-export interface SessionDocument extends SessionInput, mongoose.Document {
-  createdAt: Date
-  updatedAt: Date
-}
+import { SessionDocument } from './SessionModelInterfaces'
 
 const SessionSchema = new mongoose.Schema(
   {

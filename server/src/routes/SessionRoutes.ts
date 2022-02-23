@@ -3,7 +3,8 @@ import {
   CreateUserSessionHandler,
   DeleteSessionHandler,
   ReadUserSessionsHandler,
-} from '../controllers/session.controller'
+  GoogleOAuthHandler,
+} from '../controllers/Session/session.controller'
 import { deserializeUser, validate } from '../middlewares'
 import { createUserSessionSchema } from '../schema/userSession.schema'
 
@@ -15,7 +16,10 @@ sessionRoutes.post(
   CreateUserSessionHandler
 )
 
+sessionRoutes.get('/session/oauth/google', GoogleOAuthHandler)
+
 sessionRoutes.get('/session', deserializeUser, ReadUserSessionsHandler)
+
 sessionRoutes.delete('/session', deserializeUser, DeleteSessionHandler)
 
 export { sessionRoutes }

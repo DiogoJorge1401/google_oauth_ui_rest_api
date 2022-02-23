@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import { get } from 'lodash'
-import { ReIssueAccessToken } from '../services/session.service'
-import { verifyJwt } from '../utils/jwt.utils'
+import { ReIssueAccessToken } from '../services/Session/session.service'
+import { CreateCookie } from '../utils/Cookie'
+import { verifyJwt } from '../utils/Jwt.utils'
 
 export const deserializeUser = async (
   req: Request,
@@ -17,7 +18,7 @@ export const deserializeUser = async (
 
   if (!accessToken) return res.status(401).send()
 
-  const { decoded, expired, valid } = await verifyJwt(accessToken)
+  const { decoded, expired } = await verifyJwt(accessToken)
 
   if (decoded) {
     res.locals.user = decoded
@@ -27,24 +28,24 @@ export const deserializeUser = async (
   if (!refreshToken) return res.status(401).send()
 
   if (expired) {
-    const newAccessToken = await ReIssueAccessToken(refreshToken)
+    try {
+      const newAccessToken = await ReIssueAccessToken(refreshToken)
 
-    if (!newAccessToken) return res.status(401).send()
+      if (!newAccessToken) return res.status(401).send()
 
-    res.setHeader('x-access-token', newAccessToken)
+      res.setHeader('x-access-token', newAccessToken)
 
-    res.cookie('accessToken', newAccessToken, {
-      maxAge: 900000,
-      httpOnly: true,
-      domain: 'localhost',
-      path: '/',
-      sameSite: 'strict',
-      secure: false,
-    })
+      CreateCookie(res, 'accessToken', newAccessToken, {
+        maxAge: 900000,
+        sameSite: 'strict',
+      })
 
-    const { decoded } = await verifyJwt(newAccessToken)
+      const { decoded } = await verifyJwt(newAccessToken)
 
-    res.locals.user = decoded
-    return next()
+      res.locals.user = decoded
+      return next()
+    } catch (err) {
+      return res.status(400).json({ message: err.message })
+    }
   }
 }

@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import supertest from 'supertest'
 import { app } from '../app'
-import * as UserService from '../services/user.service'
-import * as UserSession from '../services/session.service'
+import * as UserService from '../services/User/user.service'
+import * as UserSession from '../services/Session/session.service'
 
 const userId = new mongoose.Types.ObjectId().toString()
 

@@ -10,7 +10,7 @@ export const signJwt = (object: Object, options?: jwt.SignOptions) => {
     algorithm: 'RS256',
   })
 }
-export const verifyJwt = async (token: string) => {
+export const verifyJwt = (token: string) => {
   try {
     const decoded = jwt.verify(token, accessTokenPublicKey)
     return {

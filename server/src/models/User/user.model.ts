@@ -1,23 +1,13 @@
 import bcrypt from 'bcrypt'
 import config from 'config'
 import mongoose from 'mongoose'
-
-export interface UserInput {
-  email?: string
-  name?: string
-  password?: string
-}
-
-export interface UserDocument extends UserInput, mongoose.Document {
-  createdAt: Date
-  updatedAt: Date
-  comparePassword(candidatePassword: string): Promise<boolean>
-}
+import { UserDocument } from './UserModelInterfaces'
 
 const UserSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
+    picture: { type: String },
     password: { type: String, required: true },
   },
   {
