@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 import useSWR from 'swr'
 import { fetcher } from '../utils/fetcher'
+import { getGoogleOAuthUrl } from '../utils/getGoogleUrl'
 
 interface User {
   _id: string
@@ -31,7 +32,7 @@ const Home: NextPage<{ fallbackData: User }> = ({ fallbackData }) => {
   return (
     <div>
       <h2>
-        Please Login <a href="/auth/login">Login</a>
+        <a href={getGoogleOAuthUrl()}>Login With Google</a>
       </h2>
     </div>
   )

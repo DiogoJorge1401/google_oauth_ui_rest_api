@@ -5,10 +5,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { object, string, TypeOf } from 'zod'
 
-interface FormValues {
-  [x: string]: any
-}
-
 const createUserSchema = object({
   name: string()
     .nonempty({ message: 'Name is required' })
@@ -47,6 +43,11 @@ const RegisterPage = () => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/api/user`,
         values
+      )
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/api/session`,
+        { email: values.email, password: values.password },
+        { withCredentials: true }
       )
       router.push('/')
     } catch (error: any) {
